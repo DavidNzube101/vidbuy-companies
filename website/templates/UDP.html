@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %} Dashboard - {{ CurrentUser['name'] }} {% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAC Website</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<header>
+	<div>{{ (CurrentUser['name'][0] + CurrentUser['name'][1]).upper() }}</div>
+	<h3>VidBuy <span>Companies</span></h3>
+	<p>&nbsp;</p>
+</header>
+<h2>Your Companies</h2>
+{% if Company %}
+	{% for cm in Company %}
+		<div class="a-company">
+			<div class="a-company-details">
+				<h2>{{ cm['name'] }}</h2>
+				<p>{{ cm['description'] }}</p>
+			</div>
+
+			<div class="a-company-actions">
+				<button style="color: #00ff00; background: #075307;"><a href="/view/{{ cm['id'] }}">View</a></button>
+				<button style="color: #ff0000; background: #530707;"><a href="/remove/{{ cm['id'] }}">Remove</a></button>
+			</div>
+		</div>
+	{% endfor %}
+
+{% else %}
+	<br>
+	<br>
+	<p style="color: #cdc3c3;">No companies yet?</p>
+	<br>
+	<br>
+{% endif %}
+<div style="display: flex; align-items: center; justify-content: space-around;">
+	<button class="button-1s2 new-company-trigger">
+		New Company
+	</button>
+
+	<button class="button-1s2 new-company-trigger-close" style="background: #ed3d3d; box-shadow: 0 0 3rem #ed3d3d; width: 40px; display: none;">
+		&times;
+	</button>
+</div>
+
+
+
+
+
+<div class="input-container" id="new-company">
+    <form method="POST">
+      <h3 align="center">Fill in your company details<br>to get started.</h3>
+      <input type="text" placeholder="Comapany Name" class="input-style-1s2">
+      <br>
+      <input type="text" placeholder="Comapany Address" class="input-style-1s2"><br>
+      <input type="text" placeholder="Comapany Name" class="input-style-1s2"><br>
+      <input type="number" placeholder="" class="input-style-1s2"><br>
+      <div class="input-sub-cont">
+	<input type="time" placeholder="Comapany Name" class="input-style-1s2">
+	<span>Time</span>
+      </div><br>
+      <div class="input-sub-cont">
+	<input type="date" placeholder="Comapany Name" class="input-style-1s2">
+	<span>Date</span>
+      </div><br>
+
+      <input type="file" placeholder="Comapany Name" class="input-style-1s2 file-upload"><br>
+
+      <button class="button-1s2">Next</button>
+    </form>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/app-script.js') }}"></script>
+</body>
+</html>
+{% endblock content %}
