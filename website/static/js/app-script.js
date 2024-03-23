@@ -8,4 +8,5 @@ new_company_trigger.addEventListener('click', ()=>{
 })
 new_company_trigger_close.addEventListener('click', ()=>{
 	new_company_el.style.display = 'none'
+	new_company_trigger_close.style.display = "none"
 })

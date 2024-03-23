@@ -153,7 +153,7 @@ def initialize_app():
                     'name': name,
                     'username': f"@{name.replace(' ', '').lower()}",
                     'email': email,
-                    'password': password1,
+                    'password': hashed_password,
                     'age': age,
                     'state_of_origin': soo,
                     'state_of_residence': sor,

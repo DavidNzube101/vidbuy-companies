@@ -38,7 +38,6 @@ def oppositeTheme(theme):
 def go_to(screen_id):
   
   User = dbORM.get_all("USER")
-  # company = dbORM.get_all("Company")
 
   def remove_duplicates(original_list):
     duplicates_removed_list = []
@@ -51,9 +50,40 @@ def go_to(screen_id):
 
   	num1, num2, num3, num4, num5, num6 = radFun(range(10)), radFun(range(10)), radFun(range(10)), radFun(range(10)), radFun(range(10)), radFun(range(10))
   	return render_template("page-error.html", eid=f"00x{num1}{num2}{num3}{num4}-{num5}{num6}", ecd="EC-002")
+
+
+  user_companies = []
+
+  def getUserCompanies(user_id):
+    company = dbORM.get_all("Company")
+    
+    companys = company
+
+    if (len(companys)) == 0:
+      return None
+    else:
+      companys_ = []
+      companys_len = []
+
+      for k, v in companys.items():
+          companys_len.append(k)
+          
+
+      for n in companys_len:
+          for k, v in companys.items():
+              if user_id == (companys[k]['user_id']).lower():
+                  companys_.append(v)
+              else:
+                  pass
+
+          break
+      
+      return companys_
   
   return render_template("UDP.html",
     ScreenID = screen_id,
+    UserCompanies = getUserCompanies(user_id=f'{current_user.id}'),
+    length=len,
     CurrentUser = User[f'{current_user.id}'],
     CurrentDate=clean_date(formatted_date),
     AppTheme=User[f'{current_user.id}']['app_theme']
@@ -82,6 +112,18 @@ def goToScreen(screen_id):
 
   return go_to(screen_id=screen_id)
 
+@views.route('/create-company', methods=['POST'])
+def createCompany():
+
+  pack = {
+    'user_id': f'{current_user.id}'
+  }
+  dbORM.add_entry("Company", f"{encrypt_k7s2.encrypter(str(pack))}")
+
+  flash("Created new company", "Success")
+
+  return go_to(1)
+
 @views.route('/edit-profile', methods=['POST'])
 def editProfile():
   
@@ -105,6 +147,24 @@ def editProfile():
   
 
   return go_to(screen_id=str(request.form['screen_id']))
+
+@views.route('/view/<string:company_id>')
+def showCompanyPage(company_id):
+  User = dbORM.get_all("USER")
+  Company = dbORM.get_all("Company")
+
+  return render_template("Company-Page.html",
+    TheCompany = Company[f'{company_id}'],
+    CurrentUser = User[f'{current_user.id}'],
+    CurrentDate=clean_date(formatted_date),
+    AppTheme=User[f'{current_user.id}']['app_theme']
+    )
+
+@views.route('/remove/<string:company_id>')
+def removeCompany(company_id):
+  company_to_delete = dbORM.find_one("Company", "id", f"{company_id}")
+  dbORM.delete_entry("Company", f"{company_to_delete}")
+  return go_to(1)
 
 @views.route('/add-to-company', methods=['POST'])
 def addTocompany():

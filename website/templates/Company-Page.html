@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ TheCompany['name'] }} - {{ CurrentUser['name'] }} {% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+	<!-- <title></title> -->
+</head>
+<body>
+
+	<h2>{{ TheCompany['name'] }}</h2>
+
+	<button class="button-1s2" style="font-size: 15px">Get <b>{{ TheCompany['name'] }}</b> Registered</button>
+
+</body>
+</html>
+
+{% endblock content %}

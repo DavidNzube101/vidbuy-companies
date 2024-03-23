@@ -39,6 +39,10 @@ header h3 span{
 	align-items: center;
 	justify-content: space-between;
 }
+.a-company-actions button a{
+	color: white;
+	text-decoration: none;
+}
 .a-company-actions button{
 	padding: 10px;
 	border: 0;
