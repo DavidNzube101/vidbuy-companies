@@ -5,8 +5,8 @@ from . import encrypt_k7s2
 
 VXD_INFO = ((__trash.retTr()))
 
-from_ = "http://127.0.0.1:2781"
-# from_ = "https://vertexxdb.pythonanywhere.com"
+# from_ = "http://127.0.0.1:2781"
+from_ = "https://vertexxdb.pythonanywhere.com"
 
 # link_prefix = f"{from_}/handler/OPERATION/{VXD_INFO}/INFO-TO-RETIRIEVE-FROM-?"
 
