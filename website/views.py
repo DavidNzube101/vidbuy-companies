@@ -4,7 +4,6 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for, current_app, send_from_directory, session, jsonify
 import random
 from flask_login import login_required, current_user
-from sqlalchemy.sql import func  # Import the 'func' module
 import json
 from .models import User
 from werkzeug.security import generate_password_hash

@@ -1,7 +1,6 @@
 
 from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_sqlalchemy import SQLAlchemy
 from .encrypt_k7s2 import encrypter, decrypter, validate_dc
 from os.path import *
 import os
