@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+
+{% block title %} Login to your VidBuy Account {% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <!-- <title></title> -->
+</head>
+<body>
+
+  <section id="login">
+  <form method="POST" action="/login">
+    <h3 align="center">Login to your VidBuy Account</h3>
+    <input type="email" name="email" placeholder="Email" class="input-style-1s2">
+    <input type="password" name="password" placeholder="Password" class="input-style-1s2">
+    <br>
+    <br>
+    <button class="button-1s2">Login</button>
+  </form>
+  <p>Don"t have an account? <a href="/signup" style="color: skyblue;">Signup here<a></p>
+  </section>
+
+</body>
+</html>
+
+{% endblock %}
+		
