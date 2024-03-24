@@ -7,7 +7,7 @@ from flask_login import login_required, current_user
 import json
 from .models import User
 from werkzeug.security import generate_password_hash
-from . import db
+
 
 from datetime import datetime
 import datetime as dt
