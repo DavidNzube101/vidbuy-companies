@@ -179,12 +179,4 @@ def initialize_app():
         return render_template("signup.html")
 
     return app
-
-def create_db(the_app):
-    db_path = os.path.join(os.path.dirname(__file__), DB_NAME)
-    if not isfile(db_path):
-        with the_app.app_context():
-            db.create_all()
-        print("Database created!")
-
     
