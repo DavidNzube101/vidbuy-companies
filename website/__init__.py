@@ -9,13 +9,9 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from .VertexClient import dbORM
 
 
-db = SQLAlchemy()
-DB_NAME = "vdc-db.db"
-
 def initialize_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'akmkakddopeaceaksmdak2223#'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///Database.db'
 
     db.init_app(app)
 
