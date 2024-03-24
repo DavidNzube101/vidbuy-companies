@@ -5,7 +5,6 @@ from flask import Blueprint, render_template, flash, request, redirect, url_for,
 import random
 from flask_login import login_required, current_user
 import json
-from .models import User
 from werkzeug.security import generate_password_hash
 
 
