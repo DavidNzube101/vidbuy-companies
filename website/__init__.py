@@ -23,8 +23,6 @@ def initialize_app():
 
     from .models import User
 
-    create_db(app)
-
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
