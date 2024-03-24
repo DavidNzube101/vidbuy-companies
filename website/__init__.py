@@ -13,8 +13,6 @@ def initialize_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'akmkakddopeaceaksmdak2223#'
 
-    db.init_app(app)
-
     from .views import views
     from .auth import auth
 
