@@ -8,6 +8,7 @@ import json
 from werkzeug.security import generate_password_hash
 
 
+
 from datetime import datetime
 import datetime as dt
 
@@ -32,6 +33,20 @@ def oppositeTheme(theme):
     return 'dark'
   else:
     return 'light'
+
+def encode_image(file_storage):
+  # Read the uploaded image data
+  image_data = file_storage.read()
+
+  # Encode the image data
+  encoded_string = base64.b64encode(image_data).decode("utf-8")
+
+  return encoded_string
+
+def get_mime_type(data):
+  decoded_data = base64.b64decode(data)
+  image_type = imghdr.what(None, h=decoded_data)
+  return f'image/{image_type}' if image_type else ''
 
 def go_to(screen_id):
   
@@ -84,7 +99,8 @@ def go_to(screen_id):
     length=len,
     CurrentUser = User[f'{current_user.id}'],
     CurrentDate=clean_date(formatted_date),
-    AppTheme=User[f'{current_user.id}']['app_theme']
+    AppTheme=User[f'{current_user.id}']['app_theme'],
+    AppThemeOpposite=oppositeTheme(User[f'{current_user.id}']['app_theme'])
     )
 
 
@@ -114,9 +130,20 @@ def goToScreen(screen_id):
 def createCompany():
 
   pack = {
-    'user_id': f'{current_user.id}'
+    'user_id': f'{current_user.id}',
+    'Name': request.form['CM-Name'],
+    'Occupation': request.form['CM-Occupation'],
+    'Address': request.form['CM-Address'],
+    'Number Of Shareholders': request.form['CM-Sh'],
+    'Number Of Directors': request.form['CM-Di'],
+    "BVN": request.form['CM-BVN'],
+    'NIN': request.form['CM-NIN'],
+    'Government ID': encode_image(request.files['CM-GID']),
+    'Signature': encode_image(request.files['CM-Sign'])
   }
-  dbORM.add_entry("Company", f"{encrypt_k7s2.encrypter(str(pack))}")
+
+
+  dbORM.add_entry("Company", str(pack))
 
   flash("Created new company", "Success")
 
@@ -151,12 +178,16 @@ def showCompanyPage(company_id):
   User = dbORM.get_all("USER")
   Company = dbORM.get_all("Company")
 
-  return render_template("Company-Page.html",
+  try:
+    return render_template("Company-Page.html",
     TheCompany = Company[f'{company_id}'],
     CurrentUser = User[f'{current_user.id}'],
     CurrentDate=clean_date(formatted_date),
     AppTheme=User[f'{current_user.id}']['app_theme']
     )
+  except Exception as e:
+    flash("Company doesn't exist! It has either been deleted or removed", category="Warning")
+    return redirect(url_for("views.viewDashBoard"))
 
 @views.route('/remove/<string:company_id>')
 def removeCompany(company_id):
@@ -179,7 +210,7 @@ def addTocompany():
     'datestamp': f'{current_date}'
   }
 
-  dbORM.add_entry("company", f"{encrypt_k7s2.encrypter(str(_))}")
+  dbORM.add_entry("Company", str(_))
 
   return go_to(screen_id=data_pack['screen'])
 

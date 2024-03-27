@@ -5,83 +5,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CAC Website</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAC Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style type="text/css">
+        :root{
+            --{{ AppThemeOpposite }}-shadow: rgba(255, 255, 255, 0.05);
+            --{{ AppThemeOpposite }}-bg: #062239f7;
+            --{{ AppThemeOpposite }}-text: #efe9e9;
+            --{{ AppThemeOpposite }}-box-bg: #4c5f72;
+
+            --{{ AppTheme }}-box-bg: #c8d0d8;
+            --{{ AppTheme }}-text: #334554;
+            --{{ AppTheme }}-bg: #f5f5f5;
+            --{{ AppTheme }}-shadow: rgba(0, 0, 0, 0.05);
+        }
+    </style>
 </head>
 <body>
-<header>
-	<div>{{ (CurrentUser['name'][0] + CurrentUser['name'][1]).upper() }}</div>
-	<h3>VidBuy <span>Companies</span></h3>
-	<p>&nbsp;</p>
-</header>
-<h2>Your Companies</h2>
-{% if length(UserCompanies) != 0 %}
-	{% for cm in UserCompanies %}
-		<div class="a-company">
-			<div class="a-company-details">
-				<h2>{{ cm['name'] }}</h2>
-				<p>{{ cm['description'] }}</p>
+
+    <div id="hamburger-menu" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closehamburger-menuBtn">&times;</span>
+            <br>
+            <h1>Menu</h1>
+            <br>
+            <p><a href="https://bluvid.000webhostapp.com" style="color: var(--light-text); text-decoration: none;">Bluvid Web Services</a></p>
+            <br>
+            <p><a href="https://davidnzube.vercel.app" style="color: var(--light-text); text-decoration: none;">About the developer</a></p>
+            <br>
+            <p><a href="/logout" style="color: var(--light-text); text-decoration: none;">Logout</a></p>
+            <br>
+            <br>
+            <button class="button-1s2 switch-theme-button" onclick="switchMode();">{% if CurrentUser['app_theme'] == 'dark' %} Light {% else %} Dark {% endif %} Mode</button>
+        </div>
+    </div>
+
+	<header>
+		<div title="Tap to view info" id="account-profile">{{ (CurrentUser['name'][0] + CurrentUser['name'][1]).upper() }}</div>
+		<h3>VidBuy <span>Companies</span></h3>
+		<p>&nbsp;</p>
+	</header>
+	<h2>Your Companies</h2>
+	{% if length(UserCompanies) != 0 %}
+		{% for cm in UserCompanies %}
+			<div class="a-company">
+				<div class="a-company-details">
+					<h2>{{ cm['name'] }}</h2>
+					<p>{{ cm['description'] }}</p>
+				</div>
+
+				<div class="a-company-actions">
+					<button style="color: #00ff00; background: #075307;"><a href="/view/{{ cm['id'] }}">View</a></button>
+					<button style="color: #ff0000; background: #530707;"><a href="/remove/{{ cm['id'] }}">Remove</a></button>
+				</div>
 			</div>
+		{% endfor %}
 
-			<div class="a-company-actions">
-				<button style="color: #00ff00; background: #075307;"><a href="/view/{{ cm['id'] }}">View</a></button>
-				<button style="color: #ff0000; background: #530707;"><a href="/remove/{{ cm['id'] }}">Remove</a></button>
-			</div>
-		</div>
-	{% endfor %}
+	{% else %}
+		<br>
+		<br>
+		<p style="color: #cdc3c3;">No companies yet?</p>
+		<br>
+		<br>
+	{% endif %}
+	<div style="display: flex; align-items: center; justify-content: space-around;">
+		<button class="button-1s2 new-company-trigger">
+			New Company
+		</button>
 
-{% else %}
-	<br>
-	<br>
-	<p style="color: #cdc3c3;">No companies yet?</p>
-	<br>
-	<br>
-{% endif %}
-<div style="display: flex; align-items: center; justify-content: space-around;">
-	<button class="button-1s2 new-company-trigger">
-		New Company
-	</button>
-
-	<button class="button-1s2 new-company-trigger-close" style="background: #ed3d3d; box-shadow: 0 0 3rem #ed3d3d; width: 40px; display: none;">
-		&times;
-	</button>
-</div>
+		<button class="button-1s2 new-company-trigger-close" style="background: #ed3d3d; box-shadow: 0 0 3rem #ed3d3d; width: 40px; display: none;">
+			&times;
+		</button>
+	</div>
 
 
 
 
 
-<div class="input-container" id="new-company">
-    <form action="/create-company" method="POST">
-      <h3 align="center">Fill in your company details<br>to get started.</h3>
+	<div class="input-container" id="new-company">
+	    <form action="/create-company" method="POST">
+	      <h3 align="center">Fill in your company details<br>to get started.</h3>
 
-      <input type="text" placeholder="Comapany Name" class="input-style-1s2">
-      <br>
+	      <input type="text" placeholder="Comapany Name" class="input-style-1s2" name="CM-Name"><br>
 
-      <input type="text" placeholder="Comapany Address" class="input-style-1s2"><br>
+	      <div class="input-sub-cont">
+	      		<select class="input-style-1s2" name="CM-Occupation">
+			      	<option>Catering</option>
+			      	<option>Technology & Innovation</option>
+			      	<option>Teaching</option>
+			      	<option>Building & Infastructure</option>
+			      	<option>Religion</option>
+			      	<option>Media & Entertainment</option>
+			      	<option>Law Firm</option>
+		      	</select>
+		      	<span>Occupation/Line of service</span>
+	      </div>
 
-      <input type="text" placeholder="Comapany Name" class="input-style-1s2"><br>
+	      <input type="text" placeholder="Comapany Address" class="input-style-1s2" name="CM-Address"><br>
 
-      <input type="number" placeholder="" class="input-style-1s2"><br>
+	      <input type="number" maxlength="4" placeholder="Number of Shareholders" class="input-style-1s2" name="CM-Sh"><br>
 
-      <div class="input-sub-cont">
-				<input type="time" placeholder="Comapany Name" class="input-style-1s2">
+	      <input type="number" maxlength="4" placeholder="Number of Directors" class="input-style-1s2" name="CM-Di"><br>
+
+	      <input type="number" maxlength="11" placeholder="Bank Verification Number (BVN) 11 Digits" class="input-style-1s2" name="CM-BVN"><br>
+
+	      <input type="number" maxlength="11" placeholder="National Identification Number (NIN) 11 Digits" class="input-style-1s2" name="CM-NIN"><br>
+
+	      <!-- <div class="input-sub-cont">
+				<input type="time" placeholder="Comapany Name" class="input-style-1s2" name="CM-">
 				<span>Time</span>
-      </div><br>
+	      </div><br>
 
-      <div class="input-sub-cont">
+	      <div class="input-sub-cont">
 				<input type="date" placeholder="Comapany Name" class="input-style-1s2">
 				<span>Date</span>
-      </div><br>
+	      </div><br> -->
 
-      <input type="file" placeholder="Comapany Name" class="input-style-1s2 file-upload"><br>
+	      <input type="file" placeholder="Government ID" class="input-style-1s2 file-upload" name="CM-GID"><br>
 
-      <button class="button-1s2">Next</button>
-    </form>
-</div>
+	      <input type="file" placeholder="Your Signature" class="input-style-1s2 file-upload" name="CM-Sign"><br>
+
+	      <button class="button-1s2">Next</button>
+	    </form>
+	</div>
 
 
 <script src="{{ url_for('static', filename='js/app-script.js') }}"></script>

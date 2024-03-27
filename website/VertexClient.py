@@ -46,10 +46,10 @@ try:
 			entry = encrypt_k7s2.encrypter(str(entry))
 
 			return eval(request_then_text(url=f'{from_}/handler/add-entry/{VXD_INFO}/{table}/{entry}'))
-			
+			# print(f">>>>>>>>>>>>>>>>>>>>>>>>>>\ne: {request_then_text(url=f'{from_}/handler/add-entry/{VXD_INFO}/{table}/{entry}')}")
 
 			# except Exception as e:
-			# 	print(f">>>>>>>>>>>>>>>>>>>>>>>>>>\ne: {e}\ntable: {table}\ncvp: {column_value_pairs}")
+				# print(f">>>>>>>>>>>>>>>>>>>>>>>>>>\ne: {e}\ntable: {table}\ncvp: {entry}")
 
 		def find_one(table, column, value):
 			table = table

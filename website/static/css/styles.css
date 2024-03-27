@@ -1,13 +1,15 @@
 body{
   font-family: "Segoe UI";
-  background: #292d4e;/*linear-gradient(to left, mediumpurple, skyblue);*/
-  color: aliceblue;
+  background: var(--light-bg);/*#292d4e;linear-gradient(to left, mediumpurple, #35dd56);*/
+  color: var(--light-text);
 }
 
 header{
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    background: #35DD56;
+    align-items: center;
+    border-radius: 10pc;
+    justify-content: space-between;
 }
 header div{
 	aspect-ratio: 1/1;
@@ -16,18 +18,21 @@ header div{
 	padding-left: 15px;
 	padding-right: 15px;
 	padding-top: 10px;
+	color: var(--dark-text);
 	padding-bottom: 10px;
 	font-weight: bolder;
+	cursor: pointer;
 }
 header h3 span{
 	background: #00aaffc7;
 	padding: 5px;
 	font-size: 14px;
 	border-radius: 0.5rem;
+	color: var(--dark-text);
 	font-weight: bolder;
 }
 .a-company{
-	background: #0000008f;
+	background: var(--light-bg);
 	border: 1px solid gainsboro;
 	border-radius: 0.5rem;
 	padding: 10px;
@@ -70,8 +75,8 @@ header h3 span{
 #new-company{
 	display: none;
 	background: #28458659;
-  border-radius: 1rem;
-  margin-top: 30px;
+	border-radius: 1rem;
+	margin-top: 30px;
 }
 #login form{
 	display: grid;
@@ -104,37 +109,72 @@ h1 span{
 	transition: 0.3s ease-in-out;
 }
 .input-style-1s2:hover{
-	box-shadow: 0 0 1rem skyblue;
-	border: 1px solid skyblue;
+	box-shadow: 0 0 1rem #35dd56;
+	border: 1px solid #35dd56;
 }
 .file-upload{
-	border: 5px dashed skyblue;
+	border: 5px dashed #35dd56;
 	padding-top: 50px;
 	padding-bottom: 50px;
 }
 .button-1s2 {
 	outline: none;
 	border: 0;
-	box-shadow: 0 0 3rem skyblue;
-	background: skyblue;
+	box-shadow: 0 0 3rem #35dd56;
+	background: #35dd56;
 	width: 200px;
 	color: white;	
 	padding: 10px;
 	font-size: 23px;
+	cursor: pointer;
 	border-radius: 1rem;
 	transition: 0.3s ease-in-out;
 }
 .button-1s2:hover{
-	border: 2px solid skyblue;
-	color: skyblue;
+	border: 2px solid #35dd56;
+	color: #35dd56;
 	background: transparent;
-	box-shadow: 0 0 0rem skyblue;
+	box-shadow: 0 0 0rem #35dd56;
 }
 
 
 
 
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+    z-index: 100000000;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
 
+.modal-content {
+    position: absolute;
+    z-index: 100000000;
+    width: 80%;
+    height: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--light-bg);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+.modal-content h1{
+	color: var(--light-text);
+}
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
 
 
 

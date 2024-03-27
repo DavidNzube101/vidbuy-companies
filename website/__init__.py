@@ -156,7 +156,7 @@ def initialize_app():
 
 
                 # for key, details in new_user.items():
-                dbORM.add_entry("USER", f"{encrypter(str(new_user))}")
+                dbORM.add_entry("USER", str(new_user))
 
                 flash('Account created successfully.', category='Success')
 

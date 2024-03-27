@@ -10,3 +10,26 @@ new_company_trigger_close.addEventListener('click', ()=>{
 	new_company_el.style.display = 'none'
 	new_company_trigger_close.style.display = "none"
 })
+
+accountIcon = document.querySelector("#account-profile")
+hm_modal = document.querySelector("#hamburger-menu")
+hm_modal_close = document.querySelector("#closehamburger-menuBtn")
+
+accountIcon.addEventListener('click', ()=>{
+	hm_modal.style.display = "block"
+})
+hm_modal_close.addEventListener('click', ()=>{
+	hm_modal.style.display = "none"
+})
+
+user_theme_preference = "{{ CurrentUser['app_theme'] }}"
+console.log(`[INFO]: Current theme ${user_theme_preference}`)
+function switchMode() {
+	document.querySelector(".switch-theme-button").innerHTML = "Switching"
+	fetch ("/change-app-theme", {
+		method: 'POST',
+		body: JSON.stringify({ current_app_theme: user_theme_preference }),
+	}).then((_res) => {
+		window.location.href = '/dashboard'
+	})
+}
