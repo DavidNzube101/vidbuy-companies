@@ -3,6 +3,8 @@
 
 from flask import Blueprint, render_template, flash, request, redirect, url_for, current_app, send_from_directory, session, jsonify
 import random
+import base64
+import imghdr
 from flask_login import login_required, current_user
 import json
 from werkzeug.security import generate_password_hash
@@ -100,7 +102,8 @@ def go_to(screen_id):
     CurrentUser = User[f'{current_user.id}'],
     CurrentDate=clean_date(formatted_date),
     AppTheme=User[f'{current_user.id}']['app_theme'],
-    AppThemeOpposite=oppositeTheme(User[f'{current_user.id}']['app_theme'])
+    AppThemeOpposite=oppositeTheme(User[f'{current_user.id}']['app_theme']),
+    AppThemeGreen='green'
     )
 
 
@@ -137,13 +140,18 @@ def createCompany():
     'Number Of Shareholders': request.form['CM-Sh'],
     'Number Of Directors': request.form['CM-Di'],
     "BVN": request.form['CM-BVN'],
-    'NIN': request.form['CM-NIN'],
-    'Government ID': encode_image(request.files['CM-GID']),
-    'Signature': encode_image(request.files['CM-Sign'])
+    'NIN': request.form['CM-NIN']
   }
 
 
   dbORM.add_entry("Company", str(pack))
+
+  # image_pack = {
+  #   'Government ID': encode_image(request.files['CM-GID']),
+  #   'Signature': encode_image(request.files['CM-Sign'])
+  # }
+
+  # dbORM.update_entry_dnd("Company", f"{dbORM.find_one('Company', 'Name', request.form['CM-Name'])}", str(image_pack))
 
   flash("Created new company", "Success")
 
@@ -218,9 +226,11 @@ def addTocompany():
 def changeAppTheme():
   data = json.loads(request.data)
 
-  
+  if data['current_app_theme'] == 'green':
+    dbORM.update_entry("USER", f"{dbORM.find_one('USER', 'id', str(current_user.id))}", {"app_theme": f"green"})
 
-  dbORM.update_entry("USER", f"{dbORM.find_one('USER', 'id', str(current_user.id))}", {"app_theme": f"{oppositeTheme(data['current_app_theme'])}"})
+  else:
+    dbORM.update_entry("USER", f"{dbORM.find_one('USER', 'id', str(current_user.id))}", {"app_theme": f"{oppositeTheme(data['current_app_theme'])}"})
     
 
   return jsonify({})

@@ -12,16 +12,18 @@ header{
     justify-content: space-between;
 }
 header div{
-	aspect-ratio: 1/1;
-	border-radius: 10pc;
-	background: orange;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-top: 10px;
-	color: var(--dark-text);
-	padding-bottom: 10px;
-	font-weight: bolder;
-	cursor: pointer;
+	aspect-ratio: 1 / 1;
+    border-radius: 10pc;
+    background: linear-gradient(45deg, #1e7f20, #00ff07);
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    color: var(--dark-text);
+    padding-bottom: 10px;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 4px;
 }
 header h3 span{
 	background: #00aaffc7;
@@ -159,7 +161,7 @@ h1 span{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: var(--light-bg);
+    background: linear-gradient(45deg, var(--light-bg), #1a5325);
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -170,7 +172,7 @@ h1 span{
 }
 .close {
     position: absolute;
-    top: 10px;
+    top: 10px;color: var(--light-text);
     right: 10px;
     font-size: 20px;
     cursor: pointer;

@@ -16,6 +16,10 @@ from_ = "https://vertexxdb.pythonanywhere.com"
 try:
 	response = requests.get(from_)
 
+	def request_then_text_POST(url, data):
+		req = requests.post(url, data)
+		return req.text
+
 	def request_then_text(url):
 		req = requests.get(url)
 		return req.text
@@ -63,6 +67,14 @@ try:
 			column = column
 			table = table
 			return eval(request_then_text(url=f'{from_}/handler/update-entry/{VXD_INFO}/{table}/{column}/{entry}'))
+
+		def update_entry_dnd(table, column, entry):
+			pack = {
+				'ENTRY' : str(entry),
+				'COLUMN' : column,
+				'TABLE' : table
+			}
+			return eval(request_then_text_POST(url=f'{from_}/handler/update-entry-dnd/{VXD_INFO}', data=pack))
 
 		def delete_entry(table, column):
 			table = table
