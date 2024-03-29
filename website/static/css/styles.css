@@ -138,7 +138,26 @@ h1 span{
 	background: transparent;
 	box-shadow: 0 0 0rem #35dd56;
 }
-
+.box-1s2{
+	background: linear-gradient(45deg, #ffffff, white);
+	color: black;
+    margin: 10px;
+    aspect-ratio: 2 / 3;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 300px;
+    border-radius: 20px;
+    height: fit-content;
+}
+.box-select-1s2{
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 70%;
+}
 
 
 

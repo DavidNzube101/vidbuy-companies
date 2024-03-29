@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} {{ TheCompany['name'] }} - {{ CurrentUser['name'] }} {% endblock %}
+{% block title %} {{ TheCompany['Name'] }} - {{ CurrentUser['name'] }} {% endblock %}
 {% block content %}
 
 <!DOCTYPE html>
@@ -9,23 +9,112 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-	<!-- <title></title> -->
+	<style type="text/css">
+        :root{
+            --{{ AppThemeOpposite }}-shadow: rgba(255, 255, 255, 0.05);
+            --{{ AppThemeOpposite }}-bg: #062239f7;
+            --{{ AppThemeOpposite }}-text: #efe9e9;
+            --{{ AppThemeOpposite }}-box-bg: #4c5f72;
+
+            --{{ AppTheme }}-shadow: rgb(255, 255, 255);
+            --{{ AppTheme }}-bg: #2ab42d;
+            --{{ AppTheme }}-text: #e3e8ed;
+            --{{ AppTheme }}-box-bg: #77cf89;
+
+            --{{ AppThemeGreen }}-box-bg: #c8d0d8;
+            --{{ AppThemeGreen }}-text: #334554;
+            --{{ AppThemeGreen }}-bg: #f5f5f5;
+            --{{ AppThemeGreen }}-shadow: rgba(0, 0, 0, 0.05);
+        }
+        .button-1s2{
+        	background: var(--light-text);
+        	box-shadow: var(--light-shadow);
+        	color: var(--light-bg);
+        }
+    </style>
 </head>
 <body>
 
-	<h2><b>{{ TheCompany['name'] }}</b> Details</h2>
+	<div class="cp-main" style="display: grid; place-items: center; height: 100vh;">
+		<h2><b>{{ TheCompany['Name'] }}</b> Details</h2>
 
-	<div class="box-1s2">
-		<p>{{ TheCompany['name'] }}</p>
-		<p>{{ TheCompany[''] }}</p>
-		<p>{{ TheCompany[''] }}</p>
-		<p>{{ TheCompany[''] }}</p>
-		<p>{{ TheCompany[''] }}</p>
-		<p>{{ TheCompany[''] }}</p>
-		<p>{{ TheCompany[''] }}</p>
+		<div class="box-1s2">
+			<table style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px; border-radius: 20px;">
+			  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <th style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px; border-radius: 10px 0px 0px 0px;">Field</th>
+			    <th style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px; border-radius: 0px 10px 0px 0px;">Value</th>
+			  </tr>
+			  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">Name</td>
+		        <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">{% if TheCompany['Name'] != "" %} <span style="color: #0ab70a;">{{ TheCompany['Name'] }}</span> {% else %} <span style="color: red;">Not Assigned</span> {% endif %}</td> 
+	    	  </tr>
+	    	  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">Address</td>
+		        <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">{% if TheCompany['Address'] != "" %} <span style="color: #0ab70a;">{{ TheCompany['Address'] }}</span> {% else %} <span style="color: red;">Not Assigned</span> {% endif %}</td> 
+	    	  </tr>
+	    	  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">Line of service/Occupation</td>
+		        <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">{% if TheCompany['Occupation'] != "" %} <span style="color: #0ab70a;">{{ TheCompany['Occupation'] }}</span> {% else %} <span style="color: red;">Not Assigned</span> {% endif %}</td> 
+	    	  </tr>
+	    	  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">Shareholder(s)</td>
+		        <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">{% if TheCompany['Number Of Shareholders'] != "" %} <span style="color: #0ab70a;">{{ TheCompany['Number Of Shareholders'] }}</span> {% else %} <span style="color: red;">Not Assigned</span> {% endif %}</td> 
+	    	  </tr>
+	    	  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">Director(s)</td>
+		        <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">{% if TheCompany['Number Of Directors'] != "" %} <span style="color: #0ab70a;">{{ TheCompany['Number Of Directors'] }}</span> {% else %} <span style="color: red;">Not Assigned</span> {% endif %}</td> 
+	    	  </tr>
+	    	  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">Registrar's BVN</td>
+		        <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">{% if TheCompany['BVN'] != "" %} <span style="color: #0ab70a;">{{ TheCompany['BVN'] }}</span> {% else %} <span style="color: red;">Not Assigned</span> {% endif %}</td> 
+	    	  </tr>
+	    	  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">Registrar's NIN</td>
+		        <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">{% if TheCompany['NIN'] != "" %} <span style="color: #0ab70a;">{{ TheCompany['NIN'] }}</span> {% else %} <span style="color: red;">Not Assigned</span> {% endif %}</td> 
+	    	  </tr>
+	    	  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">Government ID</td>
+		        <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">{% if TheCompany['Government ID'] %} <span style="color: #0ab70a;">Uploaded</span> {% else %} <span style="color: red;">Not Uploaded</span> {% endif %}</td> 
+	    	  </tr>
+	    	  <tr style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px;">
+			    <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px; border-radius: 0px 0px 0px 10px;">Signature</td>
+		        <td style="border: 1px solid black; color: black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); cursor: pointer; padding: 10px; border-radius: 0px 0px 10px 0px;">{% if TheCompany['Signature'] %} <span style="color: #0ab70a;">Uploaded</span> {% else %} <span style="color: red;">Not Uploaded</span> {% endif %}</td> 
+	    	  </tr>
+			</table>
+		</div>
+
+		{% if TheCompany['Signature'] or TheCompany['Government ID'] %} 
+
+			<button class="button-1s2" style="font-size: 15px">Get <b>{{ TheCompany['name'] }}</b> Registered</button>
+
+		{% else %}
+
+			<p style="color: #ffaf08; font-weight: bolder;" align="center">You can't register this company<br>due to insufficient details provided.</p>
+
+			<button class="button-1s2" disabled style="font-size: 15px; opacity: 0.4;"><a href="#cp-payment-main" style="text-decoration: none; color: var(--light-bg);">Get <b>{{ TheCompany['name'] }}</b> Registered</a></button>
+
+		{% endif %}
 	</div>
 
-	<button class="button-1s2" style="font-size: 15px">Get <b>{{ TheCompany['name'] }}</b> Registered</button>
+	<div class="cp-payment-main" style="display: grid; place-items: center; height: 100vh;" id="cp-payment-main">
+
+		<h1 align="center">Choose a payment method</h1>
+
+		<div class="box-select-1s2">
+			<img src="#">
+			<span>Transfer</span>
+			<span>&nbsp;</span>
+		</div>
+
+		<div class="box-select-1s2">
+			<img src="#">
+			<span>Card</span>
+			<span>&nbsp;</span>
+		</div>
+
+		<p align="center">Having problems? Call <a style="text-decoration: underline;" href="tel:+2349131824725">Customer Support</a> or Mail <a style="text-decoration: underline;" href="mailto:contact.bluvid@gmail.com">contact.bluvid@gmail.com</a></p>
+
+	</div>
 
 </body>
 </html>
