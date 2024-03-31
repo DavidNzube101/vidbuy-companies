@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Oops - 404 - Page not found {% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+	<!-- <title></title> -->
+	<style type="text/css">
+		.box-info{
+			background: gainsboro;
+			padding: 10px;
+			border-radius: 0.5rem;
+			font-family: monospace;
+			color: black;
+		}
+	</style>
+</head>
+<body>
+
+	<section id="login">
+		<h1>Oops <br><b>Page not found</b><br>The page you requested doesn't exist!</h1>
+	</section>
+
+</body>
+</html>
+
+{% endblock content %}

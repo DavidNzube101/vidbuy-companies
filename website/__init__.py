@@ -31,6 +31,14 @@ def initialize_app():
     def internal_server_error(e):
       return render_template('broken-page.html'), 500
 
+    @app.errorhandler(504)
+    def internal_server_error(e):
+      return render_template('page-error.html', eid='N/A', ecd='N/A'), 504
+
+    @app.errorhandler(404)
+    def internal_server_error(e):
+      return render_template('page-not-found.html'), 404
+
     FL_Login = LoginManager(app)
     FL_Login.login_view = 'login'
 
