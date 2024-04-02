@@ -23,6 +23,11 @@ try:
 	def request_then_text(url):
 		req = requests.get(url)
 		return req.text
+
+	session_token = eval(request_then_text(f"{from_}/handler/exchtk/{VXD_INFO}"))
+	session_token.append("Bluvid_App_Vidbuy_Companies")
+	session_token.append("ddx:/2#+fOPasta;-")
+	session_token = encrypt_k7s2.encrypter(str(session_token))
 	# print(eval(request_then_text(url=f'{from_}/handler/get-all/{VXD_INFO}/USER')))
 	class dbORM:
 		"""docstring for dbORM"""
@@ -32,24 +37,25 @@ try:
 		def getDBRaw():
 			return request_then_text(url=f'{from_}/handler/get-db-raw/{VXD_INFO}')
 
+
 		def get_all(table):
 			table = table
 			# connect()
 
-			return eval(request_then_text(url=f'{from_}/handler/get-all/{VXD_INFO}/{table}'))
+			return eval(request_then_text(url=f'{from_}/handler/get-all/{session_token}/{table}'))
 
 		def find_all(table, column, value):
 			table = table
 			find_pair = {column: value}
-			find_pair = encrypt_k7s2.encrypter(str(find_pair))
-			return eval(request_then_text(url=f'{from_}/handler/find-all/{VXD_INFO}/{table}/{find_pair}'))
+			find_pair = (str(find_pair))
+			return eval(request_then_text(url=f'{from_}/handler/find-all/{session_token}/{table}/{find_pair}'))
 
 		def add_entry(table, entry):
 			table = table
 			# try:
-			entry = encrypt_k7s2.encrypter(str(entry))
+			entry = (str(entry))
 
-			return eval(request_then_text(url=f'{from_}/handler/add-entry/{VXD_INFO}/{table}/{entry}'))
+			return eval(request_then_text(url=f'{from_}/handler/add-entry/{session_token}/{table}/{entry}'))
 			# print(f">>>>>>>>>>>>>>>>>>>>>>>>>>\ne: {request_then_text(url=f'{from_}/handler/add-entry/{VXD_INFO}/{table}/{entry}')}")
 
 			# except Exception as e:
@@ -58,15 +64,15 @@ try:
 		def find_one(table, column, value):
 			table = table
 			find_pair = {column: value}
-			find_pair = encrypt_k7s2.encrypter(str(find_pair))
+			find_pair = (str(find_pair))
 
-			return eval(request_then_text(url=f'{from_}/handler/find-one/{VXD_INFO}/{table}/{find_pair}'))
+			return eval(request_then_text(url=f'{from_}/handler/find-one/{session_token}/{table}/{find_pair}'))
 
 		def update_entry(table, column, entry):
-			entry = encrypt_k7s2.encrypter(str(entry))
+			entry = (str(entry))
 			column = column
 			table = table
-			return eval(request_then_text(url=f'{from_}/handler/update-entry/{VXD_INFO}/{table}/{column}/{entry}'))
+			return eval(request_then_text(url=f'{from_}/handler/update-entry/{session_token}/{table}/{column}/{entry}'))
 
 		def update_entry_dnd(table, column, entry):
 			pack = {
@@ -74,12 +80,12 @@ try:
 				'COLUMN' : column,
 				'TABLE' : table
 			}
-			return eval(request_then_text_POST(url=f'{from_}/handler/update-entry-dnd/{VXD_INFO}', data=pack))
+			return eval(request_then_text_POST(url=f'{from_}/handler/update-entry-dnd/{session_token}', data=pack))
 
 		def delete_entry(table, column):
 			table = table
 			column = column
-			return eval(request_then_text(url=f'{from_}/handler/delete-entry/{VXD_INFO}/{table}/{column}'))
+			return eval(request_then_text(url=f'{from_}/handler/delete-entry/{session_token}/{table}/{column}'))
 
 
 except Exception as e:

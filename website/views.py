@@ -146,14 +146,31 @@ def createCompany():
 
   dbORM.add_entry("Company", str(pack))
 
-  # image_pack = {
-  #   'Government ID': encode_image(request.files['CM-GID']),
-  #   'Signature': encode_image(request.files['CM-Sign'])
-  # }
+  image_pack = {
+    'Government ID': encode_image(request.files['CM-GID']),
+    'Signature': encode_image(request.files['CM-Sign'])
+  }
 
-  # dbORM.update_entry_dnd("Company", f"{dbORM.find_one('Company', 'Name', request.form['CM-Name'])}", str(image_pack))
+  dbORM.update_entry_dnd("Company", f"{dbORM.find_one('Company', 'Name', request.form['CM-Name'])}", str(image_pack))
 
   flash("Created new company", "Success")
+
+  return go_to(1)
+
+@views.route('/edit-company', methods=['POST'])
+def editCompany():
+
+  pack = {
+    'user_id': f'{current_user.id}',
+    'Name': request.form['CM-Name'],
+    'Occupation': request.form['CM-Occupation'],
+    'Address': request.form['CM-Address'],
+    'Number Of Shareholders': request.form['CM-Sh'],
+    'Number Of Directors': request.form['CM-Di']
+  }
+
+
+  dbORM.update_entry("Company", f"{dbORM.find_one('Company', 'id', str(request.form['CM-id']))}", str(pack))
 
   return go_to(1)
 
