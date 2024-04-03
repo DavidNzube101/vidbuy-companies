@@ -1,3 +1,21 @@
+@keyframes loadroll{
+	0%{
+		transform: scale(1.05);
+	}
+	25%{
+		transform: scale(1.10);
+	}
+	50%{
+		transform: scale(1.05);
+	}
+	75%{
+		transform: scale(1.10);
+	}
+	100%{
+		transform: scale(1.05);
+	}
+}
+
 body{
   font-family: "Segoe UI";
   background: var(--light-bg);/*#292d4e;linear-gradient(to left, mediumpurple, #35dd56);*/

@@ -57,6 +57,16 @@
         </div>
     </div>
 
+    <div id="loader-menu" class="modal" style="backdrop-filter: blur(0.1rem);">
+        <div class="modal-content" style="background: transparent; box-shadow: none;">
+            <span class="close" style="opacity: 0;" id="closeloader-menuBtn">&times;</span>
+            <br>
+            <div style="display: grid; place-items: center;">
+            	<article style="background: #ff000000; padding: 20px; aspect-ratio: 1 / 1; width: 120px; border-radius: 10pc; border: 5px solid green; transform: scale(1); animation: loadroll 2s infinite linear;">&nbsp;</article>
+            </div>
+        </div>
+    </div>
+
 	<header>
 		<div title="Tap to view info" id="account-profile">{{ (CurrentUser['name'][0] + CurrentUser['name'][1]).upper() }}</div>
 		<h3>VidBuy <span>Companies</span></h3>
@@ -68,12 +78,12 @@
 			<div class="a-company">
 				<div class="a-company-details">
 					<h2>{{ cm['Name'] }}</h2>
-					<p>{{ cm['Description'] }}</p>
+					<p>{{ cm['Address'] }}</p>
 				</div>
 
 				<div class="a-company-actions">
-					<button style="color: #00ff00; background: #075307;"><a href="/view/{{ cm['id'] }}">View</a></button>
-					<button style="color: #ff0000; background: #530707;"><a href="/remove/{{ cm['id'] }}">Remove</a></button>
+					<button onclick="showLoader();" style="color: #00ff00; background: #075307;"><a href="/view/{{ cm['id'] }}">View</a></button>
+					<button onclick="showLoader();" style="color: #ff0000; background: #530707;"><a href="/remove/{{ cm['id'] }}">Remove</a></button>
 				</div>
 			</div>
 		{% endfor %}
@@ -142,7 +152,7 @@
 
 	      <input type="file" placeholder="Your Signature" class="input-style-1s2 file-upload" name="CM-Sign"><br>
 
-	      <button class="button-1s2">Next</button>
+	      <button class="button-1s2" onclick="showLoader();">Next</button>
 	    </form>
 	</div>
 	<br>

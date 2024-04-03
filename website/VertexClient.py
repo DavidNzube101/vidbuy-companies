@@ -39,53 +39,67 @@ try:
 
 
 		def get_all(table):
-			table = table
+			pack = {
+				"TABLE": table,
+				'SESSION TOKEN': session_token
+			}
 			# connect()
 
-			return eval(request_then_text(url=f'{from_}/handler/get-all/{session_token}/{table}'))
+			return eval(request_then_text_POST(url=f'{from_}/handler/get-all', data=pack))
 
 		def find_all(table, column, value):
-			table = table
-			find_pair = {column: value}
-			find_pair = (str(find_pair))
-			return eval(request_then_text(url=f'{from_}/handler/find-all/{session_token}/{table}/{find_pair}'))
+			pack = {
+				'TABLE' : table,
+				'FIND_PAIR' : str({column: value}),
+				'SESSION TOKEN': session_token
+			}
+			return eval(request_then_text_POST(url=f'{from_}/handler/find-all', data=pack))
 
 		def add_entry(table, entry):
-			table = table
-			# try:
-			entry = (str(entry))
-
-			return eval(request_then_text(url=f'{from_}/handler/add-entry/{session_token}/{table}/{entry}'))
+			pack = {	
+				'TABLE' : table,
+				'ENTRY' : str(entry),
+				'SESSION TOKEN': session_token
+			}
+			return eval(request_then_text_POST(url=f'{from_}/handler/add-entry', data=pack))
 			# print(f">>>>>>>>>>>>>>>>>>>>>>>>>>\ne: {request_then_text(url=f'{from_}/handler/add-entry/{VXD_INFO}/{table}/{entry}')}")
 
 			# except Exception as e:
 				# print(f">>>>>>>>>>>>>>>>>>>>>>>>>>\ne: {e}\ntable: {table}\ncvp: {entry}")
 
 		def find_one(table, column, value):
-			table = table
-			find_pair = {column: value}
-			find_pair = (str(find_pair))
-
-			return eval(request_then_text(url=f'{from_}/handler/find-one/{session_token}/{table}/{find_pair}'))
+			pack = {	
+				'TABLE' : table,
+				'FIND_PAIR' : str({column: value}),
+				'SESSION TOKEN': session_token
+			}
+			return eval(request_then_text_POST(url=f'{from_}/handler/find-one', data=pack))
 
 		def update_entry(table, column, entry):
-			entry = (str(entry))
-			column = column
-			table = table
-			return eval(request_then_text(url=f'{from_}/handler/update-entry/{session_token}/{table}/{column}/{entry}'))
+			pack = {	
+				'ENTRY' : str(entry),
+				'COLUMN' : column,
+				'TABLE' : table,
+				'SESSION TOKEN': session_token
+			}
+			return eval(request_then_text_POST(url=f'{from_}/handler/update-entry', data=pack))
 
 		def update_entry_dnd(table, column, entry):
 			pack = {
 				'ENTRY' : str(entry),
 				'COLUMN' : column,
-				'TABLE' : table
+				'TABLE' : table,
+				'SESSION TOKEN': session_token
 			}
-			return eval(request_then_text_POST(url=f'{from_}/handler/update-entry-dnd/{session_token}', data=pack))
+			return eval(request_then_text_POST(url=f'{from_}/handler/update-entry-dnd', data=pack))
 
 		def delete_entry(table, column):
-			table = table
-			column = column
-			return eval(request_then_text(url=f'{from_}/handler/delete-entry/{session_token}/{table}/{column}'))
+			pack = {
+				'TABLE': table,
+				'COLUMN': column,
+				'SESSION TOKEN': session_token
+			}
+			return eval(request_then_text_POST(url=f'{from_}/handler/delete-entry', data=pack))
 
 
 except Exception as e:

@@ -33,3 +33,19 @@ function switchMode() {
 		window.location.href = '/dashboard'
 	})
 }
+
+tba_btn1 = document.querySelector(".TBA-btn1")
+tba_btn2 = document.querySelector(".TBA-btn2")
+tba_btn3 = document.querySelector(".TBA-btn3")
+ld_modal = document.querySelector("#loader-menu")
+ld_modal_close = document.querySelector("#closeloader-menuBtn")
+
+function showLoader(){
+	ld_modal.style.display = "block"
+}
+ld_modal_close.addEventListener('click', ()=>{
+	ld_modal.style.display = "none"
+})
+window.addEventListener('reload', ()=>{
+	ld_modal.style.display = "block"
+})
